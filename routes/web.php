@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 
@@ -19,8 +20,8 @@ use App\Http\Controllers\CustomerController;
 
 //auth web api routes(login,register,logout,profile,update profile)
 
-Route::post('/user-registration',[UserController::class,'UserRegistration'])->name('userregistration');
-Route::post('/user-login',[UserController::class,'UserLogin'])->name('userlogin');
+Route::post('/user-registration',[UserController::class,'UserRegistration']);
+Route::post('/user-login',[UserController::class,'UserLogin']);
 Route::get('/logout',[UserController::class,'UserLogout'])->middleware('auth:sanctum');
 Route::get('/user-profile',[UserController::class,'UserProfile'])->middleware('auth:sanctum');
 Route::post('/user-update',[UserController::class,'UpdateProfile'])->middleware('auth:sanctum');
@@ -30,20 +31,7 @@ Route::post('/reset-password',[UserController::class,'ResetPassword'])->middlewa
 
 
 //page routes
-Route::view('/','pages.auth.page-login')->name('login');
-Route::view('/userRegistration','pages.auth.page-registration')->name('registration');
-Route::view('/sendOtp','pages.auth.send-otp-page');
-Route::view('/verifyOtp','pages.auth.verify-otp-page');
-Route::view('/resetPassword','pages.auth.reset-pass-page');
-Route::view('/userProfile','pages.dashboard.profile-page');
-
-
-
-//dashboard page routes
-Route::view('/dashboard','pages.dashboard.page-dashboard')->name('dashboard')->middleware('auth:sanctum');
-
-
-
+Route::get('/',[UserController::class,'UserLoginView'])->name('login');
 
 
 
@@ -63,3 +51,50 @@ Route::get("/list-customer",[CustomerController::class,'CustomerList'])->middlew
 Route::post("/delete-customer",[CustomerController::class,'CustomerDelete'])->middleware('auth:sanctum');
 Route::post("/update-customer",[CustomerController::class,'CustomerUpdate'])->middleware('auth:sanctum');
 Route::post("/customer-by-id",[CustomerController::class,'CustomerByID'])->middleware('auth:sanctum');
+
+
+//product web api routes(product create,product list,product update,product delete,product by id,)
+
+Route::post("/create-product",[ProductController::class,'ProductCreate'])->middleware('auth:sanctum');
+Route::get("/list-product",[ProductController::class,'ProductList'])->middleware('auth:sanctum');
+Route::post("/delete-product",[ProductController::class,'ProductDelete'])->middleware('auth:sanctum');
+Route::post("/update-product",[ProductController::class,'ProductUpdate'])->middleware('auth:sanctum');
+Route::post("/product-by-id",[ProductController::class,'ProductByID'])->middleware('auth:sanctum');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Route::view('/userRegistration','pages.auth.page-registration')->name('registration');
+// Route::view('/sendOtp','pages.auth.send-otp-page');
+// Route::view('/verifyOtp','pages.auth.verify-otp-page');
+// Route::view('/resetPassword','pages.auth.reset-pass-page');
+// Route::view('/userProfile','pages.dashboard.profile-page');
+
+
+
+//dashboard page routes
+//Route::view('/dashboard','pages.dashboard.page-dashboard')->name('dashboard')->middleware('auth:sanctum');

@@ -47,7 +47,7 @@ class UserController extends Controller
             ]);
 
             $user = user::where('email', $request->input('email'))->first();
-            // Auth::login($user);
+    
 
 
 
@@ -61,7 +61,7 @@ class UserController extends Controller
 
 
             return response()->json(['status' => 'success', 'message' => 'Login Successful','token'=>$token]);
-    
+
 
 
 
@@ -82,9 +82,9 @@ class UserController extends Controller
 
 
 
-    function Index(Request $request){
-        //return response()->json(['status' => 'ops!', 'message' => 'please login first']);
-        return view('pages.dashboard.page-dashboard');
+    function UserLoginView(Request $request){
+        return response()->json(['status' => 'ops!', 'message' => 'please login first']);
+
 
     }
 
